@@ -1,6 +1,6 @@
 extends Area2D
 
-const VELOCIDAD = 250
+const VELOCIDAD = 300
 
 var movimiento = Vector2()
 var direccion = 1
@@ -18,4 +18,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Proyectil_body_entered(body):
+	if body.is_in_group("Enemigo"):
+		body.morir()
 	queue_free()

@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
-var velocidad = 200
+const GRAVEDAD = 700
+const VELOCIDAD = 200
+const ARRIBA = Vector2(0,-1)
+
 var salto = -300
-var arriba = Vector2(0,-1)
-var gravedad = 700
+var direccion = 1
 
 var movimiento = Vector2()
+
 
 const PROYECTIL = preload("res://Player/Proyectil.tscn")
 
@@ -13,30 +16,47 @@ const PROYECTIL = preload("res://Player/Proyectil.tscn")
 onready var cam = $Camera2D
 onready var manejo_camara = $Manejo_camara
 
+var spawn = position
+
 func _ready():
-	pass 
+	spawn = position
+	 
 
 func _physics_process(delta):
-	movimiento.y += gravedad * delta
+	print(spawn)
+	movimiento.y += GRAVEDAD * delta
 	
 	if Input.is_action_pressed("ui_right"):
-		movimiento.x = velocidad
-		$Sprite.scale.x = 1
+		movimiento.x = VELOCIDAD
+		direccion = 1
+		if(!$AnimationPlayer.is_playing()):
+			$AnimationPlayer.play("Corriendo")
+		$Cuerpo.scale.x = 1
 		if sign($Position2D.position.x) == -1:
 			$Position2D.position.x *= -1
 	elif Input.is_action_pressed("ui_left"):
-		movimiento.x = -velocidad
-		$Sprite.scale.x = -1
+		movimiento.x = -VELOCIDAD
+		direccion = -1
+		if(!$AnimationPlayer.is_playing()):
+			$AnimationPlayer.play("Corriendo")
+		$Cuerpo.scale.x = -1
 		if sign($Position2D.position.x) == 1:
 			$Position2D.position.x *= -1
 	else:
 		movimiento.x = 0
+		if(!$AnimationPlayer.is_playing()):
+			$AnimationPlayer.play("Idle")
 	
 	if Input.is_action_pressed("ui_up") && is_on_floor():
 		movimiento.y = salto
 	
+	
 	if Input.is_action_just_pressed("X"):
-		$AnimationPlayer.play_backwards("ataque")
+		$AnimationPlayer.play("ataque")
+		if direccion == 1:
+			$Cuerpo.scale.x = 1
+		else:
+			$Cuerpo.scale.x = -1
 	
 	
 	if Input.is_action_just_pressed("Z"):
@@ -48,7 +68,7 @@ func _physics_process(delta):
 		get_parent().add_child(proyectil)
 		proyectil.position = $Position2D.global_position
 	
-	movimiento = move_and_slide(movimiento, arriba)
+	movimiento = move_and_slide(movimiento, ARRIBA)
 
 	#for para la camara
 	for area in manejo_camara.get_overlapping_areas():
@@ -58,6 +78,14 @@ func _physics_process(delta):
 			cam.limit_top = area.position.y
 			cam.limit_bottom = area.position.y + 360 * area.scale.y
 
+func morirJugador():
+	position = spawn
 
-func _on_GolpeEspada_area_entered(area):
-	pass 
+func _on_GolpeEspada_body_entered(body):
+	if body.is_in_group("Enemigo"):
+		body.morir()
+
+
+func _on_AreaCuerpo_body_entered(body):
+	if body.is_in_group("Enemigo"):
+		morirJugador()

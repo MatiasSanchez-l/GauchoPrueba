@@ -1,32 +1,34 @@
-extends Node
+extends KinematicBody2D
 class_name Enemigo
 
-const GRAVEDAD = 750
+const GRAVEDAD = 700
+const ARRIBA = Vector2(0,-1)
 
 var vida_max = 2
-var velocidad = 75
-var salto = 250
+var velocidad = 100
+var salto = -450
 
 var movimientoDir = 1
-var moviemiento = Vector2()
+var movimiento = Vector2()
 var vida = 2
 
-var casa = position
+var spawn = position
+#var esta_muerto = false
 
 func _ready():
 	add_to_group("Enemigo")
-	casa = position
-	set_collision_layer_bit(0,0)
-	set_collision_layer_bit(1,1)
-	set_collision_mask_bit(0,0)
-	set_collision_mask_bit(1,1)
+	spawn = position
+	#set_collision_layer_bit(0,0)
+	#set_collision_layer_bit(1,1)
+	#set_collision_mask_bit(0,0)
+	#set_collision_mask_bit(1,1)
 	inicializar()
 
 func inicializar():
 	vida = vida_max
 	movimientoDir = 1
 	movimiento = Vector2()
-	posicion = casa
+	position = spawn
 	show()
 	inicializar_extra()
 
@@ -47,13 +49,19 @@ func movimiento_vertical():
 	movimiento.y = movimientoDir * velocidad
 
 func gravedad():
-	movimiento.y += gravedad * get_physics_process_delta_time()
+	movimiento.y += GRAVEDAD * get_physics_process_delta_time()
 
-func jump():
+func saltar():
 	movimiento.y = salto
 
+func dar_vuelta():
+	movimientoDir = -movimientoDir
+	position.x += movimientoDir * 2
 
 func morir():
-	print(srt(nombre, "murio"))
-	vida = vida_max
-	ocultar()
+	movimiento = Vector2(0,0)
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	$TimerMuerte.start()
+	#print(str(name, "murio"))
+	#vida = vida_max
+	#hide()
