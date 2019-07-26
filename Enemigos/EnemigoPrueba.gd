@@ -14,6 +14,7 @@ var vida = 2
 
 var spawn = position
 #var esta_muerto = false
+onready var enemigo = get_tree().get_nodes_in_group("Enemigo")
 
 func _ready():
 	add_to_group("Enemigo")

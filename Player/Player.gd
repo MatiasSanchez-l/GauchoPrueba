@@ -9,7 +9,6 @@ var direccion = 1
 
 var movimiento = Vector2()
 
-
 const PROYECTIL = preload("res://Player/Proyectil.tscn")
 
 #variables para la camara
@@ -20,10 +19,9 @@ var spawn = position
 
 func _ready():
 	spawn = position
-	 
+	add_to_group("Player")
 
 func _physics_process(delta):
-	print(spawn)
 	movimiento.y += GRAVEDAD * delta
 	
 	if Input.is_action_pressed("ui_right"):

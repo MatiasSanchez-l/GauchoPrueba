@@ -27,4 +27,4 @@ cast_to = Vector2( 0, 17 )
 wait_time = 2.0
 one_shot = true
 
-[connection signal="timeout" from="TimerMuerte" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TimerMuerte" to="." method="_on_TimerMuerte_timeout"]
