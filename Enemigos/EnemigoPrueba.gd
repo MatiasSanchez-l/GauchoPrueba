@@ -14,7 +14,6 @@ var vida = 2
 
 var spawn = position
 #var esta_muerto = false
-onready var enemigo = get_tree().get_nodes_in_group("Enemigo")
 
 func _ready():
 	add_to_group("Enemigo")
@@ -30,8 +29,8 @@ func inicializar():
 	movimientoDir = 1
 	movimiento = Vector2()
 	position = spawn
-	show()
-	inicializar_extra()
+	#show()
+	#inicializar_extra()
 
 func inicializar_extra():
 	pass
@@ -60,7 +59,7 @@ func dar_vuelta():
 	position.x += movimientoDir * 2
 
 func morir():
-	movimiento = Vector2(0,0)
+	#movimiento = Vector2(0,0)
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$TimerMuerte.start()
 	#print(str(name, "murio"))

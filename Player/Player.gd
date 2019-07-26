@@ -4,7 +4,7 @@ const GRAVEDAD = 700
 const VELOCIDAD = 200
 const ARRIBA = Vector2(0,-1)
 
-var salto = -300
+var salto = -350
 var direccion = 1
 
 var movimiento = Vector2()
@@ -81,7 +81,7 @@ func morirJugador():
 
 func _on_GolpeEspada_body_entered(body):
 	if body.is_in_group("Enemigo"):
-		body.morir()
+		body.vida -= 1
 
 
 func _on_AreaCuerpo_body_entered(body):

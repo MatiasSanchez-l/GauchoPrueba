@@ -19,5 +19,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Proyectil_body_entered(body):
 	if body.is_in_group("Enemigo"):
-		body.morir()
+		body.vida -= 5
 	queue_free()

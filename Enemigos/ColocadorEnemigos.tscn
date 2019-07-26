@@ -35,7 +35,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 1/shapes = [  ]
 1/z_index = 0
 
-[node name="ColocadorEnemigos" type="TileMap"]
+[node name="ColocadorEspecial" type="TileMap"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
