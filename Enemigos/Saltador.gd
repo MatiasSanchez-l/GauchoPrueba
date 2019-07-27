@@ -1,5 +1,6 @@
 extends Enemigo
 
+
 func _physics_process(delta):
 	gravedad()
 	vida()
@@ -13,3 +14,4 @@ func _on_Timer_timeout():
 
 func _on_TimerMuerte_timeout():
 	queue_free()
+

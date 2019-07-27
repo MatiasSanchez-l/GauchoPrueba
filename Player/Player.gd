@@ -6,6 +6,7 @@ const ARRIBA = Vector2(0,-1)
 
 var salto = -350
 var direccion = 1
+var invulnerable = false
 
 var movimiento = Vector2()
 
@@ -78,12 +79,34 @@ func _physics_process(delta):
 
 func morirJugador():
 	position = spawn
+	
 
 func _on_GolpeEspada_body_entered(body):
 	if body.is_in_group("Enemigo"):
 		body.vida -= 1
 
-
 func _on_AreaCuerpo_body_entered(body):
 	if body.is_in_group("Enemigo"):
 		morirJugador()
+
+
+
+
+func _on_Manejo_camara_body_entered(body):
+	if body.is_in_group("Enemigo"):
+		body.set_physics_process(true)
+
+
+func _on_Manejo_camara_body_exited(body):
+	if body.is_in_group("Enemigo"):
+		body.set_physics_process(false)
+
+
+func _on_Area2D_body_entered_inicializar_enemigo(body):
+	if body.is_in_group("Enemigo"):
+		body.set_physics_process(true)
+
+
+func _on_Area2D_body_exited_finalizar_enemigo(body):
+	if body.is_in_group("Enemigo"):
+		body.set_physics_process(false)

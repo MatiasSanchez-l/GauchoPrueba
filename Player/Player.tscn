@@ -15,7 +15,7 @@ extents = Vector2( 11, 5 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "Corriendo"
 length = 0.001
 tracks/0/type = "value"
@@ -170,7 +170,7 @@ tracks/5/keys = {
 "values": [ 90.0, 0.0, -90.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 16.1, 16.1 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -213,20 +213,22 @@ smoothing_enabled = true
 smoothing_speed = 20.0
 
 [node name="Manejo_camara" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( -16, -16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Manejo_camara"]
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Corriendo = SubResource( 7 )
+anims/Corriendo = SubResource( 4 )
 anims/Idle = SubResource( 5 )
 anims/ataque = SubResource( 6 )
 
 [node name="AreaCuerpo" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCuerpo"]
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [connection signal="body_entered" from="Cuerpo/Espada/GolpeEspada" to="." method="_on_GolpeEspada_body_entered"]
 [connection signal="body_entered" from="AreaCuerpo" to="." method="_on_AreaCuerpo_body_entered"]

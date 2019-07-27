@@ -32,8 +32,8 @@ func inicializar():
 	#show()
 	#inicializar_extra()
 
-func inicializar_extra():
-	pass
+#func inicializar_extra():
+#	pass
 
 func vida():
 	if vida <= 0:
@@ -57,6 +57,10 @@ func saltar():
 func dar_vuelta():
 	movimientoDir = -movimientoDir
 	position.x += movimientoDir * 2
+
+func volver_al_lugar():
+	print("heeheee")
+	position = spawn
 
 func morir():
 	#movimiento = Vector2(0,0)
