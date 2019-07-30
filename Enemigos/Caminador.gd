@@ -10,13 +10,14 @@ var esta_muerto = false
 
 
 func _ready():
+	add_to_group("Enemigo")
 	pass
 
 func morir():
 	esta_muerto = true
 	movimiento = Vector2(0,0)
 	$CollisionShape2D.call_deferred("set_disabled", true)
-	$Timer.start()
+	$TimerMuerte.start()
 
 func _physics_process(delta):
 	if esta_muerto == false:
@@ -34,5 +35,4 @@ func _physics_process(delta):
 		direccion = -direccion
 		$DetectarSuelo.position.x *= -1
 
-func _on_Timer_timeout():
-	queue_free()
+

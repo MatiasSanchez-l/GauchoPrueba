@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="PruebaGaucho"
 run/main_scene="res://Mundo/Mundo.tscn"
-config/icon="res://Player/Player.png"
+config/icon="res://Tiles/cubo02.png"
 
 [display]
 

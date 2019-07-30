@@ -13,7 +13,7 @@ var movimiento = Vector2()
 var vida = 2
 
 var spawn = position
-#var esta_muerto = false
+var esta_muerto = false
 
 func _ready():
 	add_to_group("Enemigo")
@@ -25,10 +25,11 @@ func _ready():
 	inicializar()
 
 func inicializar():
-	vida = vida_max
-	movimientoDir = 1
-	movimiento = Vector2()
-	position = spawn
+	if esta_muerto == false:
+		vida = vida_max
+		movimientoDir = 1
+		movimiento = Vector2()
+		position = spawn
 	#show()
 	#inicializar_extra()
 
@@ -54,18 +55,11 @@ func gravedad():
 func saltar():
 	movimiento.y = salto
 
-func dar_vuelta():
-	movimientoDir = -movimientoDir
-	position.x += movimientoDir * 2
-
-func volver_al_lugar():
-	print("heeheee")
-	position = spawn
-
 func morir():
-	#movimiento = Vector2(0,0)
+	esta_muerto = true
+	movimiento = Vector2(0,0)
 	$CollisionShape2D.call_deferred("set_disabled", true)
-	$TimerMuerte.start()
+	$AnimatedSprite.play("Muerte")
 	#print(str(name, "murio"))
 	#vida = vida_max
 	#hide()

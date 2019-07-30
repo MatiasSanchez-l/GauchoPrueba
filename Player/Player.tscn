@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/PlayerIdle.png" type="Texture" id=2]
 [ext_resource path="res://Player/Arma.png" type="Texture" id=3]
-[ext_resource path="res://Player/PlayerRunning.png" type="Texture" id=4]
-[ext_resource path="res://Player/PlayerAtacking.png" type="Texture" id=5]
+[ext_resource path="res://Player/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://Player/PlayerRunning.png" type="Texture" id=5]
+[ext_resource path="res://Player/PlayerAtacking.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 11, 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11, 5 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
@@ -28,7 +29,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ ExtResource( 5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Cuerpo/Espada:visible")
@@ -155,7 +156,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 6 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Cuerpo/Espada:rotation_degrees")
@@ -180,9 +181,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="Cuerpo" type="Sprite" parent="."]
 editor/display_folded = true
 texture = ExtResource( 2 )
@@ -198,19 +196,24 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cuerpo/Espada/GolpeEspada"]
 position = Vector2( -0.899582, 0.128513 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 20, 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
 current = true
 process_mode = 0
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
 smoothing_speed = 20.0
+script = ExtResource( 4 )
 
 [node name="Manejo_camara" type="Area2D" parent="."]
 editor/display_folded = true
