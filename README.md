@@ -1,6 +1,6 @@
 # Video juego básico 🕹️
 
-Este es un video juego basico hecho con godot engine
+Este es un video juego básico hecho con godot engine
 
 ## En este proyecto hay:
 * personaje inicial con movimientos básicos
